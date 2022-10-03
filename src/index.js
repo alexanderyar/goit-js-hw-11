@@ -137,7 +137,7 @@ console.log('hello');
 
     
 async function jsEngine() {
-  incrementIncrease()
+  
   
    try {
      if (500 - fetchedImagesSum < 200) {
@@ -165,6 +165,6 @@ async function jsEngine() {
         (error)
         {console.log(error)
    }
-    
+    incrementIncrease()
 }
    
