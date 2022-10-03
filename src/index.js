@@ -27,7 +27,7 @@ let incrementPage = 1;
 
 let fetchedImagesSum = null;
 
-let pagePaginationValue = 200;
+let pagePaginationValue = 40;
 
 refs.searchFormEl.addEventListener('submit', onSubmit)
 
@@ -41,6 +41,7 @@ async function onClickLoadMore() {
   // } catch (error) {
   //   console.lof(error)
   // }
+  incrementIncrease()
   jsEngine()
 
 }
@@ -50,6 +51,7 @@ async function onClickLoadMore() {
     console.log(e)
    e.preventDefault();
    clearTheGallery()
+   incrementPage = 1;
    refs.loadMoreEl.classList.add("is-hidden");
   //  incrementIncrease()
   //  try {
@@ -140,7 +142,7 @@ async function jsEngine() {
   
   
    try {
-     if (500 - fetchedImagesSum < 200) {
+     if (500 - fetchedImagesSum < 40) {
         pagePaginationValue = 500 - fetchedImagesSum
      }
      
