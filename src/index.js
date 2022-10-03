@@ -34,13 +34,7 @@ refs.searchFormEl.addEventListener('submit', onSubmit)
 refs.loadMoreEl.addEventListener('click', onClickLoadMore)
 
 async function onClickLoadMore() {
-  // incrementIncrease()
-  //   try {
-  //   const feedMeToMarkUpFunction = await fetchImages(refs.inputFieldEl.value)
-  // createMarkUp(feedMeToMarkUpFunction)
-  // } catch (error) {
-  //   console.lof(error)
-  // }
+
   incrementIncrease()
   jsEngine()
 
@@ -53,17 +47,12 @@ async function onClickLoadMore() {
    clearTheGallery()
    incrementPage = 1;
    refs.loadMoreEl.classList.add("is-hidden");
-  //  incrementIncrease()
-  //  try {
-  //     clearTheGallery()
-  //       const feedMeToMarkUpFunction = await fetchImages(refs.inputFieldEl.value)
-  //       createMarkUp(feedMeToMarkUpFunction)
-  //   } catch {
-  //       (error)
-  //       console.log(error)
-  //   }
-  //  jsEngine()
+ 
    const a = await jsEngine()
+   console.log(a)
+   if (a === undefined) {
+     return
+   }
    Notiflix.Notify.success(`Hooray! We found ${a}  images.`)
    refs.loadMoreEl.classList.remove("is-hidden");
 }
@@ -71,7 +60,7 @@ async function onClickLoadMore() {
   function createMarkUp(markUpDataArray) {
    
     console.log(markUpDataArray)
- 
+    if (!markUpDataArray) {return}
     refs.galleryRootEl.insertAdjacentHTML('beforeend', markUpDataArray.map(singleCardMarkUp))
      const gallery = new SimpleLightbox('.gallery a', {captionsData:'alt'});
 }
@@ -151,17 +140,18 @@ async function jsEngine() {
      
       
      
-     fetchedImagesSum += feedMeToMarkUpFunction.hits.length
+     fetchedImagesSum += feedMeToMarkUpFunction?.hits?.length
  
      console.log(fetchedImagesSum)
    
-     createMarkUp(feedMeToMarkUpFunction.hits)
+     createMarkUp(feedMeToMarkUpFunction?.hits)
      if (fetchedImagesSum == 500) {
        refs.loadMoreEl.classList.add("is-hidden");
        Notiflix.Notify.warning('Oops, the end of this collection :(')
        return
      }
-     const totalHits = feedMeToMarkUpFunction.totalHits
+     const totalHits = feedMeToMarkUpFunction?.totalHits
+     console.log(totalHits)
      return totalHits
     } catch 
         (error)
